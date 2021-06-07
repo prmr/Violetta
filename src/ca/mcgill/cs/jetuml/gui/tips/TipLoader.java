@@ -60,6 +60,9 @@ final class TipLoader
 		try(InputStream tipsInputStream = TipLoader.class.getResourceAsStream(
 				String.format(TIP_FILE_PATH_FORMAT, pId)))
 		{
+			if (tipsInputStream == null) {
+				return null;
+			}
 			InputStreamReader tipsReader = new InputStreamReader(tipsInputStream, StandardCharsets.UTF_8);
 			JSONTokener jsonTokener = new JSONTokener(tipsReader);
 			JSONObject jsonObject = new JSONObject(jsonTokener); 
