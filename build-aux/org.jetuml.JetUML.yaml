@@ -66,26 +66,7 @@ modules:
         type: "file"
         url: "https://repo1.maven.org/maven2/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar"
   -
-    name: "JetUML"
-    buildsystem: "simple"
-    builddir: true
-    build-commands:
-      - mkdir -p bin/jetuml
-      - cp -r icons/** bin/jetuml/
-      - find . -name '*.java' > files.txt
-      - /usr/lib/sdk/openjdk11/bin/javac -cp test:src -p /app/javafx/lib:/app/junit --add-modules javafx.controls,javafx.swing -d bin/jetuml @files.txt
-      - cd src; cp --parent `find -name '*.css'` ../bin/jetuml
-      - cd src; cp --parent `find -name '*.properties'` ../bin/jetuml
-      - cd test; cp --parent `find -name '*.properties'` ../bin/jetuml
-      - mkdir -p /app/bin/jetuml
-      - cp -R bin/jetuml/* /app/bin/jetuml
-    sources:
-      -
-        type: "git"
-        url: "https://github.com/louib/JetUML.git"
-        branch: flatpak_manifest
-  -
-    name: "invocation"
+    name: "launch-script"
     buildsystem: "simple"
     builddir: true
     build-commands: []
@@ -98,3 +79,23 @@ modules:
         dest-filename: "launch_jetuml"
         commands:
           - "/usr/lib/sdk/openjdk11/bin/java -cp /app/bin/jetuml -p /app/javafx/lib:/app/junit --add-modules javafx.controls,javafx.swing ca.mcgill.cs.jetuml.JetUML"
+  -
+    name: "JetUML"
+    buildsystem: "simple"
+    builddir: true
+    build-commands:
+      - mkdir -p bin/jetuml
+      - cp -r icons/** bin/jetuml/
+      - cp -r tipdata/** bin/jetuml/
+      - find . -name '*.java' > files.txt
+      - /usr/lib/sdk/openjdk11/bin/javac -cp test:src -p /app/javafx/lib:/app/junit --add-modules javafx.controls,javafx.swing -d bin/jetuml @files.txt
+      - cd src; cp --parent `find -name '*.css'` ../bin/jetuml
+      - cd src; cp --parent `find -name '*.properties'` ../bin/jetuml
+      - cd test; cp --parent `find -name '*.properties'` ../bin/jetuml
+      - mkdir -p /app/bin/jetuml
+      - cp -R bin/jetuml/* /app/bin/jetuml
+    sources:
+      -
+        type: "git"
+        url: "https://github.com/louib/JetUML.git"
+        branch: flatpak_manifest
