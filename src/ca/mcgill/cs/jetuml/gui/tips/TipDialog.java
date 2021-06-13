@@ -253,9 +253,6 @@ public class TipDialog
 		assert pTip != null;
 		
 		VBox tipVBox = new VBox();
-		if (pTip == null) {
-			return tipVBox;
-		}
 		tipVBox.setSpacing(TIP_ELEMENTS_SPACING);
 		tipVBox.setPadding(new Insets(PADDING));
 		
