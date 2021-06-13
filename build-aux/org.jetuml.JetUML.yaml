@@ -71,6 +71,7 @@ modules:
     builddir: true
     build-commands: []
     post-install:
+      - mkdir -p /app/bin/jetuml
       - cp launch_jetuml /app/bin/
       - chmod +x /app/bin/launch_jetuml
     sources:
